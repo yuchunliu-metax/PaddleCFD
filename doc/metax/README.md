@@ -33,7 +33,7 @@ All Case Training Reference Documents :
 
 
 Using the darcyflow ppkan case as an example to explain the training process:
-
+## darcyflow ppkan
 ### 1.Get the dataset
 ```sh
 cd /data
@@ -58,5 +58,47 @@ python main.py mode=test checkpoint=./outputs-KANONet/2025-11-24/15-02-32/KANONe
 <img width="1607" height="321" alt="517990409-58602ac5-f96a-4d66-82e5-4430e42962c0" src="https://github.com/user-attachments/assets/4cdc336f-c0a0-4219-b03c-13cacbae9688" />
  Results: The pressure field prediction relative err on the test set is MSE is 0.0071.
 <img width="1010" height="485" alt="517992729-b4c8eb6b-8fb2-4200-b5f1-a97732344133" src="https://github.com/user-attachments/assets/21eadcf7-ebdc-4d01-9093-6d799b5099a7" />
+
+## darcyflow ppdeeponet
+### 1.Get the dataset
+```sh
+cd /data
+wget -nc -P ./Problems/DarcyFlow_2d/ https://paddle-org.bj.bcebos.com/paddlecfd/datasets/ppdeeponet/darcyflow/smh_train.mat
+wget -nc -P ./Problems/DarcyFlow_2d/ https://paddle-org.bj.bcebos.com/paddlecfd/datasets/ppdeeponet/darcyflow/smh_test_in.mat
+
+/opt/package/ppcfd/PaddleCFD/examples/darcyflow/ppdeeponet
+ln -sf /data/Problems/DarcyFlow_2d ./Problems/
+```
+
+### 2.Train
+
+```sh
+python pimultionet.py
+```
+### 3.Eval
+
+```python
+python pimultionet.py --mode eval
+```
+## aerodynamic_car_design
+### 1.Get the dataset
+```sh
+cd /data
+wget https://paddle-org.bj.bcebos.com/paddlecfd/datasets/pptransformer/mlcfd_data.zip
+unzip mlcfd_data.zip
+cd /opt/package/ppcfd/PaddleCFD/examples/aerodynamic_car_design
+ln -sf /data/preprocessed_data ./data
+```
+
+### 2.Train
+
+```sh
+python main_shapenetcar.py
+```
+### 3.Eval
+
+```python
+python pimultionet.py --mode eval
+```
 
  
